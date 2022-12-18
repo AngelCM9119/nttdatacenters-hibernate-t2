@@ -12,5 +12,6 @@
 
 		<!-- MAPEOS -->
 		<mapping class="com.nttdata.hibernate.persistence.Client" />
+		<mapping class="com.nttdata.hibernate.persistence.Contract" />
 	</session-factory>
 </hibernate-configuration>

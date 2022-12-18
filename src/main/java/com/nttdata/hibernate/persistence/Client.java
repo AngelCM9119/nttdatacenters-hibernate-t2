@@ -1,12 +1,15 @@
 package com.nttdata.hibernate.persistence;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -44,6 +47,10 @@ public class Client extends AbstractEntity implements Serializable
 	/** DNI del cliente */
 	@Column(name="dni", length = 9, unique = true, nullable = false)
 	private String dni;
+	
+	/** Lista de contratos que tiene el cliente */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+	private List<Contract> contracts;
 
 	@Override
 	public long getSerialId()
@@ -129,11 +136,29 @@ public class Client extends AbstractEntity implements Serializable
 		this.dni = dni;
 	}
 
+	/**
+	 * @return the contracts
+	 */
+	public List<Contract> getContracts()
+	{
+		return contracts;
+	}
+
+	/**
+	 * @param contracts the contracts to set
+	 */
+	public void setContracts(List<Contract> contracts)
+	{
+		this.contracts = contracts;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Client [id=" + id + ", nombre=" + name + ", apellido1=" + lastname1 + ", apellido2=" + lastname2 + ", dni=" + dni + "]";
+		return "Client [id=" + id + ", name=" + name + ", lastname1=" + lastname1 + ", lastname2=" + lastname2 + ", dni=" + dni + ", contracts=" + contracts + "]";
 	}
+
+	
 	
 	
 	
